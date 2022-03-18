@@ -1,3 +1,19 @@
 from django.db import models
+from core import models as core_models
 
-# Create your models here.
+
+class Conversations(core_models.TimeStampedModel):
+
+    participants = models.ManyToManyField("users.User", blank=True)
+
+    def __str__(self):
+        return str(self.created)
+
+
+class Message(core_models.TimeStampedModel):
+    message = models.TextField()
+    user = models.ForeignKey("users.User", on_delete=models.CASCADE)
+    conversation = models.ForeignKey("Conversations", on_delete=models.CASCADE)
+
+    def __str___(self):
+        return f"{self.user} says : {self.message}"
