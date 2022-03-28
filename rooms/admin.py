@@ -24,10 +24,17 @@ class ItemAdmin(admin.ModelAdmin):
     pass
 
 
+class PhotoInline(admin.TabularInline):
+
+    model = models.Photo
+
+
 @admin.register(models.Room)
 class RoomAdmin(admin.ModelAdmin):
 
     """Room Admin Definition"""
+
+    inlines = (PhotoInline,)
 
     fieldsets = (
         (
@@ -88,6 +95,8 @@ class RoomAdmin(admin.ModelAdmin):
         "country",
     )
 
+    raw_id_fields = ("host",)
+
     search_fields = ("^city", "^host__username")
 
     filter_horizontal = (
@@ -95,6 +104,8 @@ class RoomAdmin(admin.ModelAdmin):
         "facilities",
         "house_rules",
     )
+
+    def save_models(self,)
 
     def count_amenities(self, obj):
         return obj.amenities.count()
@@ -111,6 +122,6 @@ class PhotoAdmin(admin.ModelAdmin):
     list_display = ("__str__", "get_thumbnail")
 
     def get_thumbnail(self, obj):
-        return mark_safe(f'<img width="50px"src="{obj.file.url}" />')
+        return mark_safe(f'<img width="50px" src="{obj.file.url}" />')
 
     get_thumbnail.short_description = "THUMBNAIL"
