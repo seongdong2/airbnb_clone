@@ -105,8 +105,6 @@ class RoomAdmin(admin.ModelAdmin):
         "house_rules",
     )
 
-    def save_models(self,)
-
     def count_amenities(self, obj):
         return obj.amenities.count()
 
