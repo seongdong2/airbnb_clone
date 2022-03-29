@@ -23,7 +23,6 @@ class Command(BaseCommand):
         seeder = Seed.seeder()
         all_users = user_models.User.objects.all()
         room_types = room_models.RoomType.objects.all()
-        print(room_types, all_users)
         seeder.add_entity(
             room_models.Room,
             number,
@@ -40,8 +39,28 @@ class Command(BaseCommand):
         )
         created_photos = seeder.execute()
         created_clean = flatten(list(created_photos.values()))
-        print(created_clean)
+        amenities_foreignkey = room_models.Amenity.objects.all()
+        facilities_foreignkey = room_models.Facility.objects.all()
+        rules_foreignkey = room_models.HouseRule.objects.all()
         for pk in created_clean:
-            photo = room_models.Room.objects.get(pk=pk)
-            print(photo)
+            room_foreignkey = room_models.Room.objects.get(pk=pk)
+            for i in range(3, random.randint(10, 30)):
+                room_models.Photo.objects.create(
+                    caption=seeder.faker.sentence(),
+                    room=room_foreignkey,
+                    file=f"/room_photos/{random.randint(1,31)}.webp",
+                )
+            for a in amenities_foreignkey:
+                magic_number = random.randint(0, 15)
+                if magic_number % 2 == 0:
+                    room_foreignkey.amenities.add(a)
+            for f in facilities_foreignkey:
+                magic_number = random.randint(0, 15)
+                if magic_number % 2 == 0:
+                    room_foreignkey.facilities.add(f)
+            for r in rules_foreignkey:
+                magic_number = random.randint(0, 15)
+                if magic_number % 2 == 0:
+                    room_foreignkey.house_rules.add(r)
+
         self.stdout.write(self.style.SUCCESS(f"{number} rooms Created!"))
