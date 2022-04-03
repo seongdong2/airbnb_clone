@@ -14,3 +14,6 @@ class HomeView(ListView):
     ordering = "created"
     context_object_name = "rooms"
 
+def room_detail(request, pk):
+    room = models.Room.objects.get(pk=pk)
+    return render(request, "rooms/detail.html", {"room": room})
