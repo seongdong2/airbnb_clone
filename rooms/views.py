@@ -15,4 +15,6 @@ class HomeView(ListView):
 
 class RoomDetail(DetailView):
 
-    pass
+    """ RoomDetail Definition """
+
+    model = models.Room
