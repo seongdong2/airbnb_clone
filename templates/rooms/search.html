@@ -14,7 +14,7 @@
     <h4>Searching by {{city}}</h4>
 
     <form method="get" action="{% url "rooms:search" %}">
-       
+        {{form.as_p}}
         <button>Search</button>
 
         <h3>Results</h3>
@@ -22,7 +22,19 @@
             <h3>{{room.name}}</h3>
         
         {% endfor %}
+        
+        <h5>
+            {% if page_obj.has_previous %}
+                <a href="?page={{page_obj.previous_page_number}}">Previos</a>
+            {% endif %}
+            
+            Page {{page_obj.number}} of {{page_obj.paginator.num_pages}}
 
+            {% if page_obj.has_next %}
+                <a href="?page={{page_obj.next_page_number}}">Next</a>
+            {% endif %}
+
+        <h5>
 
     </form> 
 
