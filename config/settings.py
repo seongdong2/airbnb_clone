@@ -21,6 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = "4qj@u13&aob&n78m(8o%w4xq2i!$h!*b&4ip^)mn)4=ao-8gl&"
 
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -39,6 +40,7 @@ DJANGO_APPS = [
 ]
 
 THIRD_PARTY_APPS = ["django_countries", "django_seed"]
+
 
 PROJECT_APPS = [
     "core.apps.CoreConfig",
@@ -137,3 +139,11 @@ AUTH_USER_MODEL = "users.User"
 MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")
 
 MEDIA_URL = "/media/"
+
+# Email Configration
+# password = !Qq123123123
+
+EMAIL_HOST = "smtp.mailgun.org"
+EMAIL_PORT = "587"
+EMAIL_HOST_USER = os.environ.get("MAILGUN_USERNAME")
+EMAIL_HOST_PASSWORD = os.environ.get("MAILGUN_PASSWORD")
