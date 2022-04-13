@@ -19,7 +19,14 @@ class Command(BaseCommand):
         number = options.get("number")
         seeder = Seed.seeder()
         seeder.add_entity(
-            users_models.User, number, {"is_staff": False, "is_superuser": False}
+            users_models.User,
+            number,
+            {
+                "is_staff": False,
+                "is_superuser": False,
+                "email_verified": False,
+                "email_secret": "",
+            },
         )
         seeder.execute()
         self.stdout.write(self.style.SUCCESS(f"{number} Users Created!"))
