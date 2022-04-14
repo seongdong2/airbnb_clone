@@ -23,10 +23,12 @@ class LoginForm(forms.Form):
 class SignUpForm(forms.ModelForm):
     class Meta:
         model = models.User
-        fields = ("first_name", "last_name", "email")
+        fields = ("first_name", "last_name", "email", "is_superuser", "is_staff")
 
     password = forms.CharField(widget=forms.PasswordInput)
     password1 = forms.CharField(widget=forms.PasswordInput, label="Confirm Password")
+    is_superuser = forms.BooleanField(initial=False)
+    is_staff = forms.BooleanField(initial=False)
 
     def clean_password1(self):
         password = self.cleaned_data.get("password")
@@ -43,4 +45,5 @@ class SignUpForm(forms.ModelForm):
         password = self.cleaned_data.get("password")
         user.username = email
         user.set_password(password)
+
         user.save()
