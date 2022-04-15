@@ -72,7 +72,16 @@ def github_login(request):
     )
 
 
+def kakao_login(request):
+    client_id = os.environ.get("")
+    redirect_uri = ""
+
+
 class GithubException(Exception):
+    pass
+
+
+class KakaoException(Exception):
     pass
 
 
