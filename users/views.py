@@ -72,16 +72,7 @@ def github_login(request):
     )
 
 
-def kakao_login(request):
-    client_id = os.environ.get("")
-    redirect_uri = ""
-
-
 class GithubException(Exception):
-    pass
-
-
-class KakaoException(Exception):
     pass
 
 
@@ -140,4 +131,34 @@ def github_callback(request):
 
 
 def kakao_login(request):
+    client_id = os.environ.get("KAKAO_ID")
+    redirect_uri = "https://127.0.0.1:8000/users/login/kakao/callback"
+    return redirect(
+        f"https://kauth.kakao.com/oauth/authorize?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code"
+    )
+
+
+class KakaoException(Exception):
     pass
+
+
+def kakao_callback(request):
+    try:
+        code = request.GET.get("code")
+        client_id = os.environ.get("KAKAO_ID")
+        redirect_uri = "https://127.0.0.1:8000/users/login/kakao/callback"
+        token_request = requests.get(
+            f"https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id={client_id}&redirect_url={redirect_uri}&code={code}"
+        )
+        token_json = token_request.json()
+        error = token_json.get("error", None)
+        if error is not None:
+            raise KakaoException()
+        access_token = token_json.get("access_token")
+        profile_request = request.get(
+            "http://kapi.kakao.com/v2/user/me",
+            heards={"Authorization": f"beare{access_token}"},
+        )
+        profile_request.json()
+    except KakaoException:
+        return redirect(reverse("users:login"))
