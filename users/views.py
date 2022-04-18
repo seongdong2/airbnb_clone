@@ -1,13 +1,10 @@
-from email.mime import application
 import os
-import profile
 import requests
 from django.views.generic import FormView
 from django.urls import reverse_lazy
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import redirect, reverse
 from django.contrib.auth import authenticate, login, logout
 from django.core.files.base import ContentFile
-
 from . import forms, models
 
 
@@ -35,7 +32,7 @@ def log_out(request):
 class SignUPView(FormView):
 
     template_name = "users/signup.html"
-    form_class = UserCreationForm
+    form_class = forms.SignUpForm
     success_url = reverse_lazy("core:home")
     initial = {
         "first_name": "seongdong",
