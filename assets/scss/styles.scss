@@ -2,4 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+.nav_link {
+    @apply ml-8 border-b-2 rounded-t border-black;
 
+    a {
+        @apply py-4 px-1;
+    }
+}
+
+.nav_link:hover {
+    @apply border-white;
+}
