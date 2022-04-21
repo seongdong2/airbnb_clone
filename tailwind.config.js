@@ -1,3 +1,4 @@
+
 module.exports = {
   content: [],
   theme: {
@@ -13,7 +14,10 @@ module.exports = {
 
         "rose-500": "#f43f5e",
         "stone-100": "#f5f5f4",
-      }
+      },
+      fontFamily:{
+        body : ['Quicksand', 'sans-serif']
+      },
 
     },
   },
