@@ -8,28 +8,23 @@
         <link rel="stylesheet" href="{% static "css/styles.css" %}">
         <title>{% block page_title  %}{% endblock page_title %}| Nbnb </title>
     </head>
-    <body class="text-gray-800 mt-40">
-        <header class="container max-w-full inset-0 flex items-center justify-between px-20 h-40 border-b border-gray-300 fixed  bg-black" >
-            <div class="flex flex-none items-center ">
+    <body class="text-gray-800 mt-40 ">
+        <header class="container max-w-full inset-0 flex items-center px-20 h-20  fixed justify-between bg-white" >
+            <div class="flex items-center ">
             <a href="{% url "core:home" %}">
-                <img class="w-8 items-center mr-5" src="{% static 'img/logo.png' %}" />
-                <ul><li class = "text-xl font-bold items-center text-white mr-12 "><a>airbnb</a></li></ul>
-            </a>
-            </div>
-            <div class="shrink w=full">
+                <img class="w-8 mr-2" src="{% static 'img/logo_black.png' %}" />
+                <ul><li class = "text-xl font-bold text-rose-500 mr-12 "><a>airbnb</a></li></ul>
+            </a>            
             {% block search-bar %}
             <form method="get" action="{% url "rooms:search" %}">
-                <input class=" border px-5 py-5 w-64 text-sm font-medium placeholder-gray-600 rounded-full hover:bg-gray-200" name="city" placeholder="어디로 여행가세요?" />
+                <input class="border px-5 py-3 text-sm font-bold items-center placeholder-black rounded-full shadow-md hover:bg-stone-100" name="city" placeholder="검색 시작하기" />
             </form> 
             {% endblock search-bar %}
-            </div>
-            <div class="flex-none justify-between text-white ">
             {% include "partials/nav.html" %}
-            </div>
+        </div>
         </header>
 
         {% block content %}{% endblock %}
-
         {% include "partials/footer.html" %}
 
     </body>
