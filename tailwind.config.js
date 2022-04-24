@@ -16,7 +16,10 @@ module.exports = {
         "stone-100": "#f5f5f4",
       },
       fontFamily: {
-        logo: ['Fredoka One', 'cursive'],
+        logo: ['Familjen Grotesk', 'sans-serif'],
+      },
+      borderRadius:{
+        xl: "1.5rem",
       },
 
     },

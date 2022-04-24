@@ -6,7 +6,7 @@
     <head>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@700&display=swap" rel="stylesheet">
 
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,10 +16,10 @@
     </head>
     <body class="text-gray-800 mt-20 ">
         <header class="ax-w-full inset-0 flex items-center px-10 h-20  fixed bg-white justify-between" >
-            <div class=" flex items-center ">
+            <div class=" flex  items-center ">
             <a href="{% url "core:home" %}">
-                <img class=" w-8 mr-2" src="{% static 'img/logo_black.png' %}" />
-                <ul><li class = "text-xl font-logo text-rose-500 mr-5 "><a>airbnb</a></li></ul>
+                <img class=" w-8 mr-1 " src="{% static 'img/logo_pink.png' %}" />
+                <ul><li class = "text-2xl font-logo  text-rose-500 mr-6 "><a>airbnb</a></li></ul>
             </a> 
 
             {% block search-bar %}
