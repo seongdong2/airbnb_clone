@@ -15,6 +15,7 @@ module.exports = {
 
         "rose-500": "#f43f5e",
         "stone-100": "#f5f5f4",
+        "stone-500" : "#78716c",
       },
       fontFamily: {
         logo: ['Familjen Grotesk', 'sans-serif'],

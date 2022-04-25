@@ -11,10 +11,11 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
         <link rel="stylesheet" href="{% static "css/styles.css" %}">
         <title>{% block page_title  %}{% endblock page_title %}| Nbnb </title>
     </head>
-    <body class="text-gray-800">
+    <body class="text-gray-800 font-light">
         <header class="ax-w-full inset-0 flex items-center px-10 h-20  fixed bg-white justify-between" >
             <div class=" flex  items-center ">
             <a href="{% url "core:home" %}">
