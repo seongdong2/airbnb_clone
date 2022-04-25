@@ -6,7 +6,7 @@
     <head>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@700&family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
 
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="{% static "css/styles.css" %}">
         <title>{% block page_title  %}{% endblock page_title %}| Nbnb </title>
     </head>
-    <body class="text-gray-800 mt-20 ">
+    <body class="text-gray-800">
         <header class="ax-w-full inset-0 flex items-center px-10 h-20  fixed bg-white justify-between" >
             <div class=" flex  items-center ">
             <a href="{% url "core:home" %}">

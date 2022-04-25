@@ -6,6 +6,7 @@ module.exports = {
       spacing: {
         "25vh": "25vh",
         "35vh": "35vh",
+        "40vh": "40vh",
         "50vh": "50vh",
         "75vh": "75vh",
         "110vh": "110vh",
@@ -17,12 +18,14 @@ module.exports = {
       },
       fontFamily: {
         logo: ['Familjen Grotesk', 'sans-serif'],
+        body: ['Noto Sans KR', 'sans-serif'],
       },
-      borderRadius:{
+      borderRadius: {
         xl: "1.5rem",
       },
 
     },
   },
+  variants: [],
   plugins: [],
 }

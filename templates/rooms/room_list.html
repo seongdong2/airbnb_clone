@@ -5,38 +5,31 @@
 {% endblock page_title %}
 
 {% block content %}
-    
-    <div class =" bg-black w-full h-110vh">
-        <div class ="flex container mx-auto bg-rose-500 w-full h-50vh rounded-xl mt-40">
+    <div class="container mx-auto">
+        <div class= "rounded-xl mt-40 w-full h-35vh text-center bg-rose-500" >
+                <ul><li class = "text-4xl font-body  text-white mr-6 "><a>10만 명에 달하는 우크라이나 피란민에게 임시 숙소를 제공해주세요</a></li></ul>
         </div>
-    
-    </div>
- 
-    
 
+        <div class ="rounded-xl mt-20 mb-24  w-full h-50vh bg-cover bg-center" style="background-image:url(https://assets3.thrillist.com/v1/image/2960603/1584x1056/crop;webp=auto;jpeg_quality=60;progressive.jpg)"></div>
+        <div class = "flex flex-wrap -mx-3 ">
+        {% for room in rooms  %}
+            {% include 'partials/room_card.html' with room=room %}
+        {% endfor %}
+        </div>
 
-    
-    {% for room in rooms  %}
-        <h3>
-            <a href="{% url "rooms:detail" room.pk %}">
-                {{room.name}} / ${{room.price}}
-            </a>
-        </h3>
-    {% endfor %}
+        <h5>
+        {% if page_obj.has_previous %}
+            <a href="?page={{page_obj.previous_page_number}}">Previous</a>
+        {% endif %}
+        
+        Page {{page_obj.number}} of {{page_obj.paginator.num_pages}}
 
-    <h5>
-    {% if page_obj.has_previous %}
-        <a href="?page={{page_obj.previous_page_number}}">Previos</a>
-    {% endif %}
-    
-    Page {{page_obj.number}} of {{page_obj.paginator.num_pages}}
+        {% if page_obj.has_next %}
+            <a href="?page={{page_obj.next_page_number}}">Next</a>
+        {% endif %}
 
-    {% if page_obj.has_next %}
-        <a href="?page={{page_obj.next_page_number}}">Next</a>
-    {% endif %}
-
-    <h5>
-
+        <h5>
+     </div>
 
 {% endblock %}
 
