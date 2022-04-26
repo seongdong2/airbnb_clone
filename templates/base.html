@@ -15,19 +15,20 @@
         <link rel="stylesheet" href="{% static "css/styles.css" %}">
         <title>{% block page_title  %}{% endblock page_title %}| Nbnb </title>
     </head>
-    <body class="text-gray-800 font-light">
-        <header class="ax-w-full inset-0 flex items-center px-10 h-20  fixed bg-white justify-between" >
+    <body class="text-gray-800 mt-24 font-light">
+        <header class="container max-w-full inset-0 flex items-center px-10 h-20  fixed bg-white justify-between" >
             <div class=" flex  items-center ">
-            <a href="{% url "core:home" %}">
-                <img class=" w-8 mr-1 " src="{% static 'img/logo_pink.png' %}" />
-                <ul><li class = "text-2xl font-logo  text-rose-500 mr-6 "><a>airbnb</a></li></ul>
-            </a> 
-
-            {% block search-bar %}
-            <form method="get" action="{% url "rooms:search" %}">
-                <input class="mx-auto self-center transition duration-300 ease-in-out border px-8 py-3 text-sm font-bold  placeholder-black rounded-full shadow-md hover:shadow-lg" name="city" placeholder="검색 시작하기" />
-            </form> 
-            {% endblock search-bar %}
+                <a href="{% url "core:home" %}">
+                    <img class=" w-8 mr-1 " src="{% static 'img/logo_pink.png' %}" />
+                    <ul><li class = "text-2xl font-logo  text-rose-500 mr-6 "><a href="{% url "core:home" %}">airbnb</a></li></ul>
+                </a>
+            </div>
+            <div>
+                {% block search-bar %}
+                <form method="get" action="{% url "rooms:search" %}">
+                    <input class="mx-auto self-center transition duration-300 ease-in-out border px-8 py-3 text-sm font-bold  placeholder-black rounded-full shadow-md hover:shadow-lg" name="city" placeholder="검색 시작하기" />
+                </form> 
+                {% endblock search-bar %}
             </div>
             {% include "partials/nav.html" %}
             
