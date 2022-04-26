@@ -6,10 +6,10 @@
 
 {% block content %}
     <div class="container mx-auto pb-10">
-        <div class= "rounded-xl mt-40 w-full h-35vh text-center bg-rose-500" >
-                <ul><li class = "text-4xl font-body  text-white mr-6 "><a>10만 명에 달하는 우크라이나 피란민에게 임시 숙소를 제공해주세요</a></li></ul>
+        <div class= " rounded-xl mt-40 w-full h-35vh text-center bg-rose-500" >
+            <div class = " text-5xl font-body py-16 p-32 text-white pb-3 ">10만 명에 달하는 우크라이나 피란민에게 임시 숙소를 제공해주세요</div>
+            <div class= "font-body text-sm px-3 py-2 rounded-lg text-white mx-auto border w-32" ><a href="https://ko.airbnb.org/help-ukraine?_ga=2.259556234.1807913130.1650958449-2131575486.1650958448&_set_bev_on_new_domain=1650958635_NGM2MmFjMmZiMTE5)">자세히 알아보기</div>
         </div>
-
         <div class ="rounded-xl mt-20 mb-24  w-full h-50vh bg-cover bg-center" style="background-image:url(https://assets3.thrillist.com/v1/image/2960603/1584x1056/crop;webp=auto;jpeg_quality=60;progressive.jpg)"></div>
         <div class = "flex flex-wrap -mx-3 ">
             {% for room in rooms  %}
@@ -17,17 +17,17 @@
             {% endfor %}
         </div>
 
-        <div class"flex items-center justify-center mx-auto container">
+        <div class="flex items-center justify-center">
             {% if page_obj.has_previous %}
-                <a href="?page={{page_obj.previous_page_number}}" class="text-teal-500">
+                <a href="?page={{page_obj.previous_page_number}}" class="text-teal-300">
                     <i class="fas fa-arrow-left fa-lg"></i>
                 </a>
             {% endif %}
             
-            <span class="mx-3 font-medium text-lg">{{page_obj.number}} of {{page_obj.paginator.num_pages}}</span>
+            <span class="mx-3 py-4 font-medium text-lg">{{page_obj.number}} of {{page_obj.paginator.num_pages}}</span>
 
             {% if page_obj.has_next %}
-                <a href="?page={{page_obj.next_page_number}}" class="text-teal-500">
+                <a href="?page={{page_obj.next_page_number}}" class="text-teal-300">
                     <i class="fas fa-arrow-right fa-lg"></i>
                 </a>
             {% endif %}
