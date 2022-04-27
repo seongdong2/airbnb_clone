@@ -2,8 +2,6 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from . import models
 
-
-
 class LoginForm(forms.Form):
 
     email = forms.EmailField()
@@ -25,7 +23,6 @@ class LoginForm(forms.Form):
 class SignUpForm(UserCreationForm):
     class Meta:
         model = models.User
-        fields = ("email", "is_superuser", "is_staff")
-    is_superuser = forms.BooleanField(initial=False)
+        fields = ("email",)
     is_staff = forms.BooleanField(initial=False)
 
