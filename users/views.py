@@ -5,6 +5,7 @@ from django.urls import reverse_lazy
 from django.shortcuts import redirect, reverse
 from django.contrib.auth import authenticate, login, logout
 from django.core.files.base import ContentFile
+from django.contrib import messages
 from . import forms, models
 
 
@@ -83,7 +84,7 @@ def github_callback(request):
             result_json = result.json()
             error = result_json.get("error", None)
             if error is not None:
-                raise GithubException()
+                raise GithubException("Can't get access token")
             else:
                 access_token = result_json.get("access_token")
                 profile_request = requests.get(
@@ -102,7 +103,7 @@ def github_callback(request):
                     try:
                         user = models.User.objects.get(email=email)
                         if user.login_method != models.User.LOGIN_GITHUB:
-                            raise GithubException()
+                            raise GithubException(f"Pleas log in with {user.login_method}")
                     except models.User.DoesNotExist:
                         user = new_user = models.User.objects.create(
                             email=email,
@@ -115,14 +116,14 @@ def github_callback(request):
                         user = new_user.set_unsable_password()
                         user = new_user.save()
                     login(request, user)
-
+                    messages.success(request, f"Welcome Back {user.first_name}")
                     return redirect(reverse("core:home"))
                 else:
-                    raise GithubException()
+                    raise GithubException("Can't get your profile")
         else:
-            raise GithubException()
-    except Exception:
-        # send error message
+            raise GithubException("Can't get code")
+    except GithubException as e:
+        messages.error(request, e)
         return redirect(reverse("users:login"))
 
 
@@ -140,7 +141,7 @@ class KakaoException(Exception):
 
 def kakao_callback(request):
     try:
-        code = request.GET.get("code")
+        code = request.GET.get("code")    
         client_id = os.environ.get("KAKAO_ID")
         redirect_uri = "http://127.0.0.1:8000/users/login/kakao/callback"
         token_request = requests.get(
@@ -149,7 +150,7 @@ def kakao_callback(request):
         token_json = token_request.json()
         error = token_json.get("error", None)
         if error is not None:
-            raise KakaoException()
+            raise KakaoException("Can't get Authorization code.")
         access_token = token_json.get("access_token")
         proflie_request = requests.get(
             "https://kapi.kakao.com/v2/user/me",
@@ -160,13 +161,13 @@ def kakao_callback(request):
         properties = profile_json.get("kakao_account")
         email = properties.get("email")
         if email is None:
-            raise KakaoException()
+            raise KakaoException("Please also give me your email")
         nickname = properties.get("profile").get("nickname")
         profile_image = properties.get("profile").get("profile_image_url")
         try:
             user = models.User.objects.get(email=email)
             if user.login_method != models.User.LOGIN_KAKAO:
-                raise KakaoException()
+                raise KakaoException(f"Please log in with: {user.login_method}")
         except models.User.DoesNotExist:
             user = models.User.objects.create(
                 email=email,
@@ -183,8 +184,9 @@ def kakao_callback(request):
                     f"{nickname}-avator.gif",
                     ContentFile(photo_request.content),
                 )
-
+        messages.success(request, f"Welcome Back {user.first_name}")
         login(request, user)
         return redirect(reverse("core:home"))
-    except KakaoException:
+    except KakaoException as e:
+        messages.error(request, e)
         return redirect(reverse("users:login"))
