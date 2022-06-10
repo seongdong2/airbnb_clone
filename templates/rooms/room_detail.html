@@ -10,7 +10,7 @@
     <h3>{{room.description}}</h3>
 </div>
 <div>
-    <h2></h2>
+    <h2>By: <a href="{{room.host.get_absolute_url}}">{{room.host.username}}</a>
     <h3>Amenities</h3>
     <ul> 
     {% for a in room.amenities.all %}

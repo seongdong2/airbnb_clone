@@ -1,6 +1,6 @@
 import os
 import requests
-from django.views.generic import FormView
+from django.views.generic import FormView, DetailView
 from django.urls import reverse_lazy
 from django.shortcuts import redirect, reverse
 from django.contrib.auth import authenticate, login, logout
@@ -25,6 +25,7 @@ class LoginView(FormView):
 
 
 def log_out(request):
+    messages.info(request, f"See you later")
     logout(request)
     return redirect(reverse("core:home"))
 
@@ -39,7 +40,11 @@ class SignUPView(FormView):
         form.save()
         email = form.cleaned_data.get("email")
         password = form.cleaned_data.get("password")
-        user = authenticate(self.request, username=email, password=password,)
+        user = authenticate(
+            self.request,
+            username=email,
+            password=password,
+        )
         if user is not None:
             login(self.request, user)
         user.verify_email()
@@ -103,7 +108,9 @@ def github_callback(request):
                     try:
                         user = models.User.objects.get(email=email)
                         if user.login_method != models.User.LOGIN_GITHUB:
-                            raise GithubException(f"Pleas log in with {user.login_method}")
+                            raise GithubException(
+                                f"Pleas log in with {user.login_method}"
+                            )
                     except models.User.DoesNotExist:
                         user = new_user = models.User.objects.create(
                             email=email,
@@ -141,7 +148,7 @@ class KakaoException(Exception):
 
 def kakao_callback(request):
     try:
-        code = request.GET.get("code")    
+        code = request.GET.get("code")
         client_id = os.environ.get("KAKAO_ID")
         redirect_uri = "http://127.0.0.1:8000/users/login/kakao/callback"
         token_request = requests.get(
@@ -190,3 +197,9 @@ def kakao_callback(request):
     except KakaoException as e:
         messages.error(request, e)
         return redirect(reverse("users:login"))
+
+
+class UserProfileView(DetailView):
+
+    model = models.User
+    context_object_name = "user_obj"
