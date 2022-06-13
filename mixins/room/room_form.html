@@ -3,14 +3,13 @@
 
     {% if form.non_field_errors %}
         {% for error in form.non_field_errors %}
-            <span class="text-red-500 font-medium text-sm">{{error}}</span>
+            <span class="text-red-700 font-medium text-sm">{{error}}</span> 
         {% endfor %}
     {% endif %}
 
-
     {% for field in form %}
-        {% include 'mixins/auth/form_input.html' with field=field %}
+        {% include 'mixins/room/room_input.html' with field=field %}
     {% endfor %}
 
-    <button class="btn bg-rose-500 text-white">{{cta}}</button>
+    <button class="btn bg-red-500 text-white">{{cta}}</button>
 </form>
