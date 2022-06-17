@@ -25,7 +25,7 @@ SECRET_KEY = "4qj@u13&aob&n78m(8o%w4xq2i!$h!*b&4ip^)mn)4=ao-8gl&"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["airbnb-test.eba-2p2kspqz.ap-northeast-2.elasticbeanstalk.com"]
 
 
 # Application definition
